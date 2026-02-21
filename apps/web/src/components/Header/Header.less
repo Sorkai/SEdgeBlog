@@ -5,6 +5,7 @@ header.vh-header {
   box-sizing: border-box;
   width: 100vw;
   height: 66px;
+  -webkit-backdrop-filter: blur(2rem);
   backdrop-filter: blur(2rem);
   background-color: var(--vh-bg-translucent);
   box-shadow: var(--vh-box-shadow);
@@ -77,6 +78,7 @@ header.vh-header {
         height: max-content;
         font-size: 0.98rem;
         font-weight: 600;
+        -webkit-user-select: none;
         user-select: none;
 
         &.search-btn,

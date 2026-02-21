@@ -39,7 +39,7 @@
     .vh-floating-button {
         // 添加底部间距，代替gap
         margin-bottom: @button-spacing;
-        
+
         // 基础过渡动画，包含高度和间距的变化
         // 特别注意：为所有可能影响布局的属性添加过渡
         transition-property: opacity, transform, background-color, color, box-shadow, width, min-width, max-width, height, margin-bottom, margin-top;
@@ -198,6 +198,7 @@
         @media (max-width: 888px) {
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
+            -webkit-user-select: none;
             user-select: none;
         }
 

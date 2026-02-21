@@ -53,6 +53,7 @@
       height: max-content;
       border-radius: 0.75rem;
       background-color: var(--vh-bg-translucent);
+      -webkit-backdrop-filter: blur(10px);
       backdrop-filter: blur(10px);
       overflow: hidden;
 
@@ -107,6 +108,7 @@
 
       // 适配暗色模式下的滤镜
       @supports (backdrop-filter: blur(10px)) {
+        -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
         background-color: var(--vh-bg-translucent);
       }

@@ -291,7 +291,12 @@
               font-weight: 500;
 
               // Markdown 样式
-              h1, h2, h3, h4, h5, h6 {
+              h1,
+              h2,
+              h3,
+              h4,
+              h5,
+              h6 {
                 margin: 1rem 0 0.5rem 0;
                 font-weight: 600;
                 line-height: 1.4;
@@ -300,7 +305,7 @@
                 width: 100%;
                 max-width: 100%;
                 word-break: break-all;
-                
+
                 // 确保 # 前缀显示
                 &::before {
                   padding-right: 0.56rem;
@@ -316,23 +321,36 @@
                 }
               }
 
-              h1 { 
+              h1 {
                 font-size: 1.5rem;
                 margin: 0 0 1rem 0;
                 padding-bottom: 0.5rem;
-                
+
                 &::before {
                   display: none; // H1 不显示 #
                 }
               }
-              h2 { 
+
+              h2 {
                 font-size: 1.3rem;
                 margin: 1.5rem 0 0.5rem 0;
               }
-              h3 { font-size: 1.1rem; }
-              h4 { font-size: 1rem; }
-              h5 { font-size: 0.9rem; }
-              h6 { font-size: 0.8rem; }
+
+              h3 {
+                font-size: 1.1rem;
+              }
+
+              h4 {
+                font-size: 1rem;
+              }
+
+              h5 {
+                font-size: 0.9rem;
+              }
+
+              h6 {
+                font-size: 0.8rem;
+              }
 
               hr {
                 margin: 1rem 0;
@@ -348,19 +366,20 @@
                 border-radius: 0.25rem;
               }
 
-              ul, ol {
+              ul,
+              ol {
                 margin: 0.5rem 0;
                 padding-left: 1.5rem;
               }
 
               li {
                 margin: 0.25rem 0;
-                
+
                 &.task-done {
                   color: var(--vh-font-66);
                   text-decoration: line-through;
                 }
-                
+
                 &.task-todo {
                   color: var(--vh-font-88);
                 }
@@ -370,7 +389,7 @@
                 width: 100%;
                 border-collapse: collapse;
                 margin: 0.5rem 0;
-                
+
                 td {
                   padding: 0.5rem;
                   border: 1px solid var(--vh-font-16);
@@ -383,7 +402,7 @@
                 background-color: var(--vh-font-6);
                 border-radius: 0.25rem;
                 overflow-x: auto;
-                
+
                 code {
                   background: none;
                   padding: 0;
@@ -465,9 +484,9 @@
                 margin-right: auto;
                 object-fit: contain;
                 overflow: hidden;
-                cursor: zoom-in;
-                cursor: -moz-zoom-in;
                 cursor: -webkit-zoom-in;
+                cursor: -moz-zoom-in;
+                cursor: zoom-in;
               }
 
               &>.vh-img-flex {
@@ -508,6 +527,7 @@
                 font-size: 0.72rem;
                 color: var(--vh-main-color);
                 transition: all .2s ease-in-out;
+                -webkit-user-select: none;
                 user-select: none;
                 cursor: pointer;
 
@@ -533,6 +553,7 @@
     .vh-tools-main {
       &>main {
         &.main {
+
           // 友情链接
           &.links-main {
             grid-template-columns: repeat(2, 1fr);
@@ -544,6 +565,7 @@
               padding: 1.06rem 0.88rem;
 
               &>.main {
+
                 // 图片网格布局
                 .vh-img-grid {
                   display: grid;
@@ -601,11 +623,13 @@
     .vh-tools-main {
       &>main {
         &.main {
+
           // 动态
           &.talking-main {
             &>article {
               &>.main {
                 .vh-img-grid {
+
                   // 平板端：每行2张
                   &.multiple {
                     grid-template-columns: repeat(2, 1fr);

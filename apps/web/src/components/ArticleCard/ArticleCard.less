@@ -31,6 +31,7 @@
       border-radius: 1rem;
       background-color: var(--vh-white-color);
       overflow: hidden;
+      -webkit-user-select: none;
       user-select: none;
       pointer-events: auto;
       cursor: pointer;
@@ -49,8 +50,8 @@
         transform: scale(1.002);
         border-color: var(--vh-main-color);
         box-shadow: 0 0 20px rgba(73, 177, 245, 0.4), 0 20px 20px rgba(0, 0, 0, 0.15);
-        
-        > header > .title {
+
+        >header>.title {
           color: var(--vh-main-color) !important;
         }
       }
@@ -74,8 +75,8 @@
           box-shadow: 0 2rem 1rem rgba(0, 0, 0, 0.1);
           z-index: 1;
           /* 高斯模糊效果 */
-          backdrop-filter: blur(6px);
           -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
           /* 兼容旧版浏览器 */
         }
 
@@ -139,8 +140,8 @@
             /* 默认渐变色结束 */
             --gradient-color-3: #e39ff6;
             background: linear-gradient(118deg, var(--gradient-color-1), var(--gradient-color-2) 26%, var(--gradient-color-3));
-            background-clip: text;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
 

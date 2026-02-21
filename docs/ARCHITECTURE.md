@@ -219,6 +219,14 @@ M5：CI/CD
 ## 12. 当前已落地初始化内容（2026-02-22）
 
 - 已完成 `apps/web` 的前端基座迁移（来源于 `foundations/Blog-Astro`，排除了仓库元数据目录）。
+
+## 13. 样式兼容约定（2026-02-22）
+
+- 对 Safari / iOS Safari 存在兼容风险的样式，统一采用前缀增强写法：
+  - `user-select` 同时声明 `-webkit-user-select`
+  - `backdrop-filter` 同时声明 `-webkit-backdrop-filter`
+- 前缀属性顺序统一为“前缀在前、标准属性在后”，避免 lint/hint 噪音并保持跨浏览器回退一致性。
+- 图片放大光标声明顺序统一为：`-webkit-zoom-in` → `-moz-zoom-in` → `zoom-in`。
 - 已建立根工作区：`package.json` + `pnpm-workspace.yaml`，支持从仓库根运行构建命令。
 - 已创建构建前置脚本：`scripts/fetch-base-data.mjs`，默认拉取 `GET /api/v1/base-stats` 并写入 `apps/web/src/data/base-stats.json`。
 - 已创建 CI/CD：`.github/workflows/deploy.yml`，包含 `Fetch -> Build -> Deploy Cloudflare -> Deploy EdgeOne` 的双线流程。

@@ -317,6 +317,7 @@
         cursor: pointer;
         transition: background-color 0.18s ease-in-out;
         z-index: 1;
+        -webkit-user-select: none;
         user-select: none;
         overflow: hidden;
 
@@ -551,9 +552,9 @@
       margin-right: auto;
       border: solid 1px var(--vh-font-16);
       border-radius: 5px;
-      cursor: zoom-in;
-      cursor: -moz-zoom-in;
       cursor: -webkit-zoom-in;
+      cursor: -moz-zoom-in;
+      cursor: zoom-in;
 
       &:not(.loaded) {
         width: 100%;
