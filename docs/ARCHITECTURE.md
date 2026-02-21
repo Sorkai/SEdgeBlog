@@ -224,6 +224,23 @@ M5：CI/CD
 - 已创建 CI/CD：`.github/workflows/deploy.yml`，包含 `Fetch -> Build -> Deploy Cloudflare -> Deploy EdgeOne` 的双线流程。
 - 已建立 `changelog/` 目录并要求后续任务持续记录变更。
 
+## 13. 第二阶段落地（2026-02-22，继续）
+
+- 已新增 Cloudflare 边缘网关骨架：`edge/cloudflare-worker`
+  - `GET /api/v1/stats/:post_id`
+  - `POST /api/v1/stats/:post_id/view`
+  - `POST /api/v1/stats/:post_id/like`
+  - `POST /api/v1/comments`
+- 已新增 EdgeOne 边缘函数骨架：`edge/edgeone-function`
+  - 与 Cloudflare 保持同一 API 契约与字段。
+- 已新增 Go 核心中枢骨架：`core/brain-api`
+  - `GET /healthz`
+  - `GET /api/v1/base-stats`（支持 `x-api-key`）
+  - `POST /internal/harvest/manual`（stub）
+  - `robfig/cron` 每 6 小时占位调度任务
+
+说明：本阶段聚焦“契约先行 + 骨架可运行”，后续将补齐 Delta 聚合、清零、评论队列收割与 Build Trigger 全链路。
+
 
 ---
 

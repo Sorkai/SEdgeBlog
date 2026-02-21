@@ -1,0 +1,15 @@
+name = "sedgeblog-edge-gateway"
+main = "src/index.ts"
+compatibility_date = "2026-02-22"
+
+[[kv_namespaces]]
+binding = "STATS_KV"
+id = "REPLACE_WITH_REAL_ID"
+
+[[kv_namespaces]]
+binding = "COMMENTS_QUEUE"
+id = "REPLACE_WITH_REAL_ID"
+
+[vars]
+WEBHOOK_URL = ""
+WEBHOOK_TOKEN = ""

@@ -1,0 +1,12 @@
+{
+    "name": "@sedge/edge-cloudflare-worker",
+    "private": true,
+    "version": "0.1.0",
+    "scripts": {
+        "dev": "wrangler dev",
+        "deploy": "wrangler deploy"
+    },
+    "devDependencies": {
+        "wrangler": "^4.24.3"
+    }
+}
