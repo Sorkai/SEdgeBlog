@@ -1,0 +1,496 @@
+.vh-aside-item.toc {
+    .vh-aside-toc {
+        width: 100%;
+        max-height: 60vh;
+        overflow-y: auto;
+
+        // 自定义滚动条
+        &::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        &::-webkit-scrollbar-track {
+            background: var(--vh-font-6);
+            border-radius: 2px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: var(--vh-font-28);
+            border-radius: 2px;
+
+            &:hover {
+                background: var(--vh-main-color-66);
+            }
+        }
+
+        #toc-navigation {
+            width: 100%;
+
+            .toc-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0.125rem;
+
+                .toc-item {
+                    position: relative;
+
+                    .toc-link {
+                        display: block;
+                        padding: 0.5rem 0.75rem;
+                        font-size: 0.8rem;
+                        line-height: 1.4;
+                        color: var(--vh-font-66);
+                        text-decoration: none;
+                        border-radius: 0.375rem;
+                        transition: all 0.2s ease-in-out;
+                        border-left: 3px solid transparent;
+                        word-break: break-word;
+
+                        &:hover {
+                            color: var(--vh-main-color);
+                            background-color: var(--vh-font-6);
+                            transform: translateX(2px);
+                        }
+
+                        &.active {
+                            color: var(--vh-main-color);
+                            background-color: var(--vh-main-color-16);
+                            border-left-color: var(--vh-main-color);
+                            font-weight: 500;
+                            transform: translateX(4px);
+                        }
+                    }
+
+                    // 不同层级的样式和缩进
+                    &.toc-level-2 .toc-link {
+                        padding-left: 0.75rem;
+                        font-weight: 600;
+                        font-size: 0.85rem;
+                        color: var(--vh-font-color);
+                    }
+
+                    &.toc-level-3 .toc-link {
+                        padding-left: 1.25rem;
+                        font-size: 0.8rem;
+
+                        &::before {
+                            content: "·";
+                            margin-right: 0.375rem;
+                            color: var(--vh-main-color-66);
+                        }
+                    }
+
+                    &.toc-level-4 .toc-link {
+                        padding-left: 1.75rem;
+                        font-size: 0.75rem;
+                        color: var(--vh-font-56);
+
+                        &::before {
+                            content: "◦";
+                            margin-right: 0.375rem;
+                            color: var(--vh-main-color-66);
+                        }
+                    }
+
+                    &.toc-level-5 .toc-link {
+                        padding-left: 2.25rem;
+                        font-size: 0.7rem;
+                        color: var(--vh-font-56);
+
+                        &::before {
+                            content: "▸";
+                            margin-right: 0.375rem;
+                            color: var(--vh-main-color-66);
+                            font-size: 0.6rem;
+                        }
+                    }
+
+                    &.toc-level-6 .toc-link {
+                        padding-left: 2.75rem;
+                        font-size: 0.7rem;
+                        color: var(--vh-font-56);
+
+                        &::before {
+                            content: "▫";
+                            margin-right: 0.375rem;
+                            color: var(--vh-main-color-66);
+                            font-size: 0.6rem;
+                        }
+                    }
+                }
+            }
+        }
+
+        // 空状态提示
+        &:empty::after {
+            content: "暂无目录";
+            display: block;
+            text-align: center;
+            color: var(--vh-font-56);
+            font-size: 0.75rem;
+            padding: 1rem;
+        }
+
+        // 目录内部回到顶部按钮
+        .toc-back-top {
+            position: sticky;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            width: 100%;
+            padding: 0.75rem 1rem;
+            margin-top: 0.5rem;
+            background: linear-gradient(135deg, var(--vh-main-color), var(--vh-main-color-88));
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-size: 0.8rem;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            transition: all 0.2s ease-in-out;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+
+            &:hover {
+                background: linear-gradient(135deg, var(--vh-main-color-88), var(--vh-main-color));
+                transform: translateY(-1px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            }
+
+            &:active {
+                transform: translateY(0);
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+
+            svg {
+                width: 14px;
+                height: 14px;
+                flex-shrink: 0;
+            }
+
+            span {
+                font-size: 0.75rem;
+                white-space: nowrap;
+            }
+        }
+    }
+}
+
+// 平板端优化
+@media screen and (max-width: 1200px) {
+    .vh-aside-item.toc {
+        .vh-aside-toc {
+            max-height: 50vh;
+
+            .toc-list {
+                .toc-item {
+                    .toc-link {
+                        font-size: 0.75rem;
+                        padding: 0.4rem 0.6rem;
+                    }
+
+                    &.toc-level-2 .toc-link {
+                        font-size: 0.8rem;
+                    }
+
+                    &.toc-level-3 .toc-link {
+                        padding-left: 1rem;
+                        font-size: 0.75rem;
+                    }
+
+                    &.toc-level-4 .toc-link {
+                        padding-left: 1.4rem;
+                        font-size: 0.7rem;
+                    }
+
+                    // 在平板端隐藏过深的层级
+                    &.toc-level-5,
+                    &.toc-level-6 {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 移动端目录按钮样式现在在 FloatingButtons.less 中统一管理
+
+// 移动端目录弹窗
+.vh-mobile-toc-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+
+    &.active {
+        opacity: 1;
+
+        .vh-mobile-toc-content {
+            transform: translateY(0);
+        }
+    }
+
+    .vh-mobile-toc-content {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        max-height: 70vh;
+        background-color: var(--vh-white-color);
+        border-radius: 1rem 1rem 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(100%);
+        transition: transform 0.3s ease;
+        overflow: hidden;
+
+        .vh-mobile-toc-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--vh-font-6);
+            background-color: var(--vh-white-color);
+
+            h3 {
+                margin: 0;
+                font-size: 1.1rem;
+                font-weight: 600;
+                color: var(--vh-font-color);
+            }
+
+            .vh-mobile-toc-close {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 2rem;
+                height: 2rem;
+                background-color: var(--vh-font-6);
+                color: var(--vh-font-66);
+                border: none;
+                border-radius: 50%;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:hover {
+                    background-color: var(--vh-font-16);
+                    color: var(--vh-font-color);
+                }
+
+                svg {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
+        }
+
+        .vh-mobile-toc-navigation {
+            padding: 1rem 1.5rem;
+            max-height: calc(70vh - 5rem);
+            overflow-y: auto;
+            margin-bottom: 2rem;
+
+            // 自定义滚动条
+            &::-webkit-scrollbar {
+                width: 4px;
+            }
+
+            &::-webkit-scrollbar-track {
+                background: var(--vh-font-6);
+                border-radius: 2px;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: var(--vh-font-28);
+                border-radius: 2px;
+
+                &:hover {
+                    background: var(--vh-main-color-66);
+                }
+            }
+
+            .toc-list {
+                list-style: none;
+                padding: 0;
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 0.25rem;
+
+                .toc-item {
+                    position: relative;
+
+                    .toc-link {
+                        display: block;
+                        padding: 0.75rem 1rem;
+                        font-size: 0.9rem;
+                        line-height: 1.4;
+                        color: var(--vh-font-66);
+                        text-decoration: none;
+                        border-radius: 0.5rem;
+                        transition: all 0.2s ease-in-out;
+                        border-left: 3px solid transparent;
+                        word-break: break-word;
+
+                        &:hover {
+                            color: var(--vh-main-color);
+                            background-color: var(--vh-font-6);
+                            transform: translateX(2px);
+                        }
+
+                        &.active {
+                            color: var(--vh-main-color);
+                            background-color: var(--vh-main-color-16);
+                            border-left-color: var(--vh-main-color);
+                            font-weight: 500;
+                            transform: translateX(4px);
+                        }
+                    }
+
+                    // 不同层级的样式和缩进
+                    &.toc-level-2 .toc-link {
+                        padding-left: 1rem;
+                        font-weight: 600;
+                        font-size: 0.95rem;
+                        color: var(--vh-font-color);
+                    }
+
+                    &.toc-level-3 .toc-link {
+                        padding-left: 1.5rem;
+                        font-size: 0.85rem;
+
+                        &::before {
+                            content: "·";
+                            margin-right: 0.5rem;
+                            color: var(--vh-main-color-66);
+                        }
+                    }
+
+                    &.toc-level-4 .toc-link {
+                        padding-left: 2rem;
+                        font-size: 0.8rem;
+                        color: var(--vh-font-56);
+
+                        &::before {
+                            content: "◦";
+                            margin-right: 0.5rem;
+                            color: var(--vh-main-color-66);
+                        }
+                    }
+
+                    // 在移动端隐藏过深的层级
+                    &.toc-level-5,
+                    &.toc-level-6 {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// 平板端适配 - 768px~888px 区间
+@media screen and (min-width: 769px) and (max-width: 888px) {
+    .vh-mobile-toc-overlay {
+        display: block;
+    }
+}
+
+// 平板端和移动端都隐藏侧边栏目录
+@media screen and (max-width: 888px) {
+    .vh-aside-item.toc {
+        display: none !important; // 在平板端和移动端强制隐藏侧边栏目录
+    }
+}
+
+// 移动端适配
+@media screen and (max-width: 768px) {
+    .vh-mobile-toc-overlay {
+        display: block; // 在移动端显示目录弹窗
+    }
+}
+
+// 桌面端确保弹窗隐藏
+@media screen and (min-width: 889px) {
+    .vh-mobile-toc-overlay {
+        display: none !important; // 桌面端强制隐藏弹窗
+    }
+}
+
+// 深色模式适配
+@media (prefers-color-scheme: dark) {
+    .vh-aside-item.toc {
+        .vh-aside-toc {
+            &::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.1);
+            }
+
+            &::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.3);
+
+                &:hover {
+                    background: rgba(255, 255, 255, 0.5);
+                }
+            }
+        }
+    }
+
+    // 移动端目录按钮深色模式现在在 FloatingButtons.less 中统一管理
+
+    // 移动端目录弹窗深色模式
+    .vh-mobile-toc-overlay {
+        background-color: rgba(0, 0, 0, 0.7);
+
+        .vh-mobile-toc-content {
+            background-color: var(--vh-dark-bg, #1a1a1a);
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
+
+            .vh-mobile-toc-header {
+                background-color: var(--vh-dark-bg, #1a1a1a);
+                border-bottom-color: rgba(255, 255, 255, 0.1);
+
+                h3 {
+                    color: var(--vh-dark-font-color, #e0e0e0);
+                }
+
+                .vh-mobile-toc-close {
+                    background-color: rgba(255, 255, 255, 0.1);
+                    color: rgba(255, 255, 255, 0.7);
+
+                    &:hover {
+                        background-color: rgba(255, 255, 255, 0.2);
+                        color: rgba(255, 255, 255, 0.9);
+                    }
+                }
+            }
+
+            .vh-mobile-toc-navigation {
+                &::-webkit-scrollbar-track {
+                    background: rgba(255, 255, 255, 0.1);
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background: rgba(255, 255, 255, 0.3);
+
+                    &:hover {
+                        background: rgba(255, 255, 255, 0.5);
+                    }
+                }
+            }
+        }
+    }
+}

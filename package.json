@@ -1,0 +1,11 @@
+{
+    "name": "sedgeblog",
+    "private": true,
+    "version": "0.1.0",
+    "packageManager": "pnpm@10",
+    "scripts": {
+        "dev": "pnpm --filter @sedge/web dev",
+        "build": "pnpm run fetch:base && pnpm --filter @sedge/web build",
+        "fetch:base": "node ./scripts/fetch-base-data.mjs"
+    }
+}

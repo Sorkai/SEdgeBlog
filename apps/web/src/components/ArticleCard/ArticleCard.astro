@@ -1,0 +1,49 @@
+---
+// --- Frontmatter ---
+import { getDescription, fmtTime } from "@/utils";
+const { post } = Astro.props;
+// 获取文章的摘要
+const description = getDescription(post);
+// 获取封面图
+import getCover from "@/utils/getCover";
+const ARTICLE_COVER: string = await getCover(post.data.cover);
+// 引入组件样式
+import "./ArticleCard.less";
+---
+
+{/*
+  为整个 <article> 元素设置 data-href 属性，用于文章页跳转。
+  同时，分类和标签恢复为 <a> 链接，指向各自的页面。
+*/}
+<article
+	class={`vh-article-item vh-animation vh-animation-init${post.data.top ? " active" : ""}`}
+	data-href={`/article/${post.data.id}`}
+>
+	<section class="vh-article-banner">
+		<img
+			src="/assets/images/lazy-loading.webp"
+			data-vh-lz-src={ARTICLE_COVER}
+			alt={post.data.title}
+		/>
+	</section>
+	<header>
+		<h3>
+			<a 
+		class={`vh-article-cat vh-cat-${post.data.categories}`} 
+		href={`/categories/${post.data.categories}`}
+	  >
+		{post.data.categories}
+	  </a>
+			<time>{fmtTime(post.data.date)}</time>
+		</h3>
+		<h1 class="title vh-ellipsis line-1">
+			{post.data.title}
+		</h1>
+	</header>
+	<h2 class="vh-article-excerpt vh-ellipsis line-2">{description}</h2>
+	<h4 class="vh-article-taglist vh-ellipsis">
+		{post.data.tags.map((tag: string) => <a href={`/tag/${tag}`}>{tag}</a>)}
+	</h4>
+</article>
+
+
