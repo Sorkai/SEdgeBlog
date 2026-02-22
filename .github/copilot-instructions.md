@@ -120,15 +120,16 @@ KV 键设计：
 标准阶段顺序：
 1. Setup（checkout、node、pnpm）
 2. Fetch（拉取最新 Base 数据）
-3. Build（`pnpm build`）
-4. Deploy Cloudflare（`wrangler pages deploy ./dist`）
-5. Deploy EdgeOne（`edgeone pages deploy` 或等价脚本）
+3. Sync Release Branch（将主分支与最新 Base 数据推送到发布分支，例如 `release-data`）
+4. Deploy Cloudflare（平台侧监听发布分支自动构建部署）
+5. Deploy EdgeOne（平台侧监听发布分支自动构建部署）
 
 Secrets 命名：
 - `SERVER_API_KEY`
-- `CLOUDFLARE_API_TOKEN`
-- `TENCENT_SECRET_ID`
-- `TENCENT_SECRET_KEY`
+
+说明：
+- 混合方案下，GitHub Actions 仅负责前置数据准备与发布分支同步。
+- Cloudflare / EdgeOne 的构建与部署由平台 Git 集成完成。
 
 ## 目录约束
 
@@ -167,3 +168,11 @@ Secrets 命名：
 - Cloudflare有关Astro适配器的官方文档：https://docs.astro.build/zh-cn/guides/integrations-guide/cloudflare/
 你可以在实现过程中随时参考这些文档，确保你的实现符合官方推荐的最佳实践。
 你也被允许查阅其他在线资源来解决实现过程中遇到的具体问题，但请确保最终实现符合上述所有约束和规范。
+
+
+
+---
+
+Custom Instructions for Copilot：
+All responses, including PR summaries, overviews, and code review comments, must be in Simplified Chinese (简体中文).
+Keep the technical terms (like bcrypt, MD5, async) in English where appropriate, but explain the logic in Chinese.

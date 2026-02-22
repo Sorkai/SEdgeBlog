@@ -158,7 +158,7 @@ KV 结构：
 - `comments(id, post_id, content, author, status, created_at)`
 - `harvest_logs(id, source, scanned, merged, reset_ok, created_at)`
 
-## 8. GitHub Actions 双线部署
+## 8. GitHub Actions + 平台 Git 监听（混合方案）
 
 目标工作流：`.github/workflows/deploy.yml`
 
@@ -170,16 +170,13 @@ KV 结构：
 - 执行 `scripts/fetch-base-data.*`
 - 携带 `SERVER_API_KEY` 调 Go 中枢
 
-3. Build
-- `pnpm build` 产出纯静态 `dist`
+3. Sync Release Branch
+- 将主分支 + 最新 Base 数据推送到独立发布分支（默认 `release-data`）
+- Cloudflare / EdgeOne 在平台侧监听该发布分支并执行各自构建部署
 
-4. Deploy-Cloudflare
-- `wrangler pages deploy ./dist`
-- Secret: `CLOUDFLARE_API_TOKEN`
-
-5. Deploy-EdgeOne
-- `edgeone pages deploy` 或官方 CLI 脚本
-- Secrets: `TENCENT_SECRET_ID`, `TENCENT_SECRET_KEY`
+约束：
+- GitHub Actions 不再直接调用 `wrangler pages deploy` 与 `edgeone pages deploy`
+- 两个平台必须监听同一发布分支，避免构建输入不一致
 
 ## 9. Astro 适配器与模式约束
 
@@ -258,16 +255,13 @@ M5：CI/CD
   - 给出 P0/P1/P2 优先级的具体开发路线
   - 定义每阶段验收标准与 DoD
 
-
----
-
-Custom Instructions for Copilot：
-All responses, including PR summaries, overviews, and code review comments, must be in Simplified Chinese (简体中文).
-Keep the technical terms (like bcrypt, MD5, async) in English where appropriate, but explain the logic in Chinese.
-
 ## 15. 依赖与包管理约定（2026-02-22）
 
 - 工作区根 `package.json` 的 `packageManager` 必须使用完整版本号（例如 `pnpm@10.30.1`），避免 Corepack 因主版本写法触发版本切换告警。
 - `pnpm.onlyBuiltDependencies` 仅允许定义在工作区根配置，不在子包重复声明，确保 pnpm 行为一致。
 - 对存在严格 peer 约束的依赖（如 `artalk` 对 `marked` 的主版本要求），应在使用方显式声明兼容版本，避免安装阶段 peer 告警。
 - 未被业务代码使用且已废弃的依赖（如 `intersection-observer`）应及时移除，减少不必要的 deprecated 告警与维护成本。
+
+
+
+
