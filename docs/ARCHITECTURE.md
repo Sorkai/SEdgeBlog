@@ -264,3 +264,10 @@ M5：CI/CD
 Custom Instructions for Copilot：
 All responses, including PR summaries, overviews, and code review comments, must be in Simplified Chinese (简体中文).
 Keep the technical terms (like bcrypt, MD5, async) in English where appropriate, but explain the logic in Chinese.
+
+## 15. 依赖与包管理约定（2026-02-22）
+
+- 工作区根 `package.json` 的 `packageManager` 必须使用完整版本号（例如 `pnpm@10.30.1`），避免 Corepack 因主版本写法触发版本切换告警。
+- `pnpm.onlyBuiltDependencies` 仅允许定义在工作区根配置，不在子包重复声明，确保 pnpm 行为一致。
+- 对存在严格 peer 约束的依赖（如 `artalk` 对 `marked` 的主版本要求），应在使用方显式声明兼容版本，避免安装阶段 peer 告警。
+- 未被业务代码使用且已废弃的依赖（如 `intersection-observer`）应及时移除，减少不必要的 deprecated 告警与维护成本。
